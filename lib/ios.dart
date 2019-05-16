@@ -9,6 +9,7 @@ import 'package:flutter_launcher_icons/constants.dart';
 class IosIcon {
   final String name;
   final int size;
+
   IosIcon({this.size, this.name});
 }
 
@@ -58,9 +59,15 @@ createIcons(config) {
 overwriteDefaultIcons(IosIcon icon, Image image) {
   Image newFile;
   if (image.width >= icon.size)
-    newFile = copyResize(image, width: icon.size, height: icon.size, interpolation: AVERAGE);
+    newFile = copyResize(image,
+        width: icon.size,
+        height: icon.size,
+        interpolation: Interpolation.average);
   else
-    newFile = copyResize(image, width: icon.size, height: icon.size, interpolation: LINEAR);
+    newFile = copyResize(image,
+        width: icon.size,
+        height: icon.size,
+        interpolation: Interpolation.linear);
 
   File(iosDefaultIconFolder + iosDefaultIconName + icon.name + ".png")
     ..writeAsBytesSync(encodePng(newFile));
@@ -70,9 +77,15 @@ saveNewIcons(IosIcon icon, Image image, String newIconName) {
   String newIconFolder = iosAssetFolder + newIconName + ".appiconset/";
   Image newFile;
   if (image.width >= icon.size)
-    newFile = copyResize(image, width: icon.size, height: icon.size, interpolation: AVERAGE);
+    newFile = copyResize(image,
+        width: icon.size,
+        height: icon.size,
+        interpolation: Interpolation.average);
   else
-    newFile = copyResize(image, width: icon.size, height: icon.size, interpolation: LINEAR);
+    newFile = copyResize(image,
+        width: icon.size,
+        height: icon.size,
+        interpolation: Interpolation.linear);
 
   File(newIconFolder + newIconName + icon.name + ".png")
       .create(recursive: true)
